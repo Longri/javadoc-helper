@@ -47,6 +47,13 @@
             <add-to-group group-id="EditMenu" anchor="last" />
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last" />
 
+            <action id="osmedile.intellij.javadochelper.AddCopyright"
+                    class="osmedile.intellij.javadochelper.AddCopyright"
+                    text="Add Copyright"
+                    description="Add Copyright" />
+
+
+
             <action id="osmedile.intellij.javadochelper.AddClassTag"
                     class="osmedile.intellij.javadochelper.AddClassTag"
                     text="Set javadoc class tags"
