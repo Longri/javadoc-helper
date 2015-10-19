@@ -2,11 +2,7 @@ package osmedile.intellij.javadochelper;
 
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiAnnotation;
-import com.intellij.psi.PsiElementFactory;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiModifierList;
+import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
 import osmedile.intellij.util.action.GroupWriteAction;
 import osmedile.intellij.util.psi.MethodUtil;
@@ -25,7 +21,7 @@ public class AddOverride extends GroupWriteAction {
             try {
 
                 final PsiModifierList modifiers = method.getModifierList();
-                PsiElementFactory factory = psiManager.getElementFactory();
+                PsiElementFactory factory = JavaPsiFacade.getInstance(project).getElementFactory();
                 PsiAnnotation annot =
                         factory.createAnnotationFromText("@Override", null);
 

@@ -1,0 +1,74 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD"
+        "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin url="http://code.google.com/p/javadoc-helper/">
+    <name>Javadoc Helper</name>
+    <description>
+        <![CDATA[
+        <p>Provide following actions:
+           <ul>
+           <li>Set configurable javadoc class tags (like @version $Id$)</li>
+           <li>Add @Override tag to method which overrides</li>
+           <li>Add {@inherited} on javadoc method or remove javadoc which is same as parent</li>
+        </ul>
+        </p>
+        <p>Actions are available under Editor popup menu, Project popup and Edit menu.<br>
+        You can right-clic on a folder to launch an action recursively.</p>
+        <p>Look at plugin "JavaDoc Sync Plugin" for others actions related to javadoc</p>
+       ]]>
+    </description>
+    <change-notes>
+        <![CDATA[
+        <p>
+    <h4>Version 1.1</h4>
+    <ul>
+        <li>Reset configuration requires a confirmation</li>
+        <li>Fixed a bug when creating new class tag</li>
+    </ul>
+    </p>
+    <h4>Version 1.0</h4>
+    <p>
+    Original release, actions:
+    <ul>
+        <li>Set configurable javadoc class tags (like @version $Id$)</li>
+        <li>Add @Override tag to method which overrides</li>
+        <li>Add {@inherited} on javadoc method or remove javadoc which is same as parent</li>
+    </ul>
+    </p>
+    ]]>
+    </change-notes>
+
+    <version>1.2</version>
+    <vendor email="osmedile@gmail.com">Olivier Smedile</vendor>
+    <idea-version since-build="7361" />
+    <actions>
+        <group id="osmedile.intellij.javadochelper" text="Javadoc Helper"
+               description="Javadoc Helper Group" popup="true">
+            <add-to-group group-id="EditorPopupMenu" anchor="last" />
+            <add-to-group group-id="EditMenu" anchor="last" />
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last" />
+
+            <action id="osmedile.intellij.javadochelper.AddClassTag"
+                    class="osmedile.intellij.javadochelper.AddClassTag"
+                    text="Set javadoc class tags"
+                    description="Set javadoc class tags" />
+
+            <action id="osmedile.intellij.javadochelper.CheckInheritDoc"
+                    class="osmedile.intellij.javadochelper.CheckInheritDoc"
+                    text="Check {@inheritDoc}"
+                    description="Check {@inheritDoc}" />
+
+            <action id="osmedile.intellij.javadochelper.AddOverride"
+                    class="osmedile.intellij.javadochelper.AddOverride"
+                    text="Add @Override" description="Add @Override" />
+        </group>
+
+    </actions>
+
+    <application-components>
+        <component>
+            <implementation-class>osmedile.intellij.javadochelper.JavadocHelperAppComp</implementation-class>
+        </component>
+    </application-components>
+
+
+</idea-plugin>

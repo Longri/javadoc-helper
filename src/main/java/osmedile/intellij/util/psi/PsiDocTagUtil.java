@@ -1,5 +1,6 @@
 package osmedile.intellij.util.psi;
 
+import com.intellij.psi.JavaDocTokenType;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.javadoc.PsiDocTag;
@@ -21,7 +22,7 @@ public class PsiDocTagUtil {
         for (int i = 2; !endAsteriskReached && i < childs.length; i++) {
             PsiElement child = childs[i];
             if ((child instanceof PsiDocToken && ((PsiDocToken) child)
-                    .getTokenType() == PsiDocToken
+                    .getTokenType() == JavaDocTokenType
                     .DOC_COMMENT_LEADING_ASTERISKS)
                     || (child instanceof PsiWhiteSpace &&
                     child.getText().startsWith("\n"))) {

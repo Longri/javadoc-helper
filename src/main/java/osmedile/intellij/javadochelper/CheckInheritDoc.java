@@ -3,10 +3,7 @@ package osmedile.intellij.javadochelper;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementFactory;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiMethod;
+import com.intellij.psi.*;
 import com.intellij.psi.javadoc.PsiDocComment;
 import com.intellij.util.IncorrectOperationException;
 import osmedile.intellij.util.action.GroupWriteAction;
@@ -80,12 +77,16 @@ public class CheckInheritDoc extends GroupWriteAction {
         if (!method.isConstructor() && method.findSuperMethods().length > 0) {
             try {
                 PsiDocComment currentComment = method.getDocComment();
-                PsiElementFactory factory = psiManager.getElementFactory();
+                PsiElementFactory factory = JavaPsiFacade.getInstance(project).getElementFactory();
 
+
+                //PsiDocComment inheritComment =
+                //        factory.createDocCommentFromText(
+                //                INHERIT_DOC_COMMENT, currentComment);
 
                 PsiDocComment inheritComment =
                         factory.createDocCommentFromText(
-                                INHERIT_DOC_COMMENT, currentComment);
+                                INHERIT_DOC_COMMENT);
 
                 if (currentComment == null) {
                     if (getAddInheritDocIfNoDoc()) {

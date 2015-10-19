@@ -2,10 +2,7 @@ package osmedile.intellij.javadochelper;
 
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElementFactory;
-import com.intellij.psi.PsiJavaFile;
-import com.intellij.psi.PsiManager;
+import com.intellij.psi.*;
 import com.intellij.psi.javadoc.PsiDocComment;
 import com.intellij.psi.javadoc.PsiDocTag;
 import com.intellij.util.IncorrectOperationException;
@@ -59,10 +56,10 @@ public class AddClassTag extends GroupWriteAction {
 
 
                 boolean addDocComment = false;
-                PsiElementFactory factory = psiManager.getElementFactory();
+                PsiElementFactory factory = JavaPsiFacade.getInstance(project).getElementFactory();
                 if (docComment == null) {
                     docComment =
-                            factory.createDocCommentFromText("/**\n*/", null);
+                            factory.createDocCommentFromText("/**\n*/");
                     addDocComment = true;
                 }
 
@@ -126,9 +123,16 @@ public class AddClassTag extends GroupWriteAction {
                             !existantTagEquals)
                             || (DONT_ADD.equals(tag.getReplaceMode()) &&
                             existantTag == null)) {
+
+                        //PsiDocTag newTag = factory.createDocTagFromText(
+                        //        "@" + tagName.replaceAll("@", "") + " " +
+                        //                tag.getValue(), docComment);
+
                         PsiDocTag newTag = factory.createDocTagFromText(
                                 "@" + tagName.replaceAll("@", "") + " " +
-                                        tag.getValue(), docComment);
+                                        tag.getValue());
+
+
                         if (REPLACE_ALL.equals(tag.getReplaceMode()) &&
                                 existantTag != null) {
 
