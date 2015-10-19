@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project relativePaths="false" version="4">
+<project version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
   </component>
@@ -43,7 +43,6 @@
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
-    <option name="DEPLOY_AFTER_MAKE" value="0" />
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
       <entry name=".+\.(gif|png|jpeg|jpg)" />
@@ -59,6 +58,11 @@
       <entry name="?*.dtd" />
       <entry name="?*.tld" />
     </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
   </component>
   <component name="ContextViewer">
     <option name="HIGHLIHGT_COLOR" value="ede4ce" />
@@ -70,6 +74,7 @@
     <option name="HIGHLIGHT_SCOPES" value="false" />
     <option name="DECOMPILATION_SOURCE_DIR" />
   </component>
+  <component name="CopyrightManager" default="" />
   <component name="DBNavigator.Project.CodeEditorSettings">
     <code-completion>
       <basic-scheme>
@@ -258,18 +263,6 @@
     <Eclipse-Importer new-module-in-eclipse-proj="false" check-eclipse-changes="false">
       <path-vars />
     </Eclipse-Importer>
-  </component>
-  <component name="InspectionProjectProfileManager">
-    <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
-    <scopes />
-    <profiles>
-      <profile version="1.0" is_locked="false">
-        <option name="myName" value="Project Default" />
-        <option name="myLocal" value="false" />
-      </profile>
-    </profiles>
-    <list size="0" />
   </component>
   <component name="InspectorGeneralConfiguration">
     <option name="MAKE_CLASSES_AND_METHODS_FINAL_IF_NOT_OVERRIDDEN" value="false" />
@@ -506,7 +499,7 @@
       <SplitterProportionsDataImpl />
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA 7718" project-jdk-type="IDEA JDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA 7718" project-jdk-type="IDEA JDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ResourceManagerContainer">
@@ -561,6 +554,7 @@
       </map>
     </option>
     <option name="myVersion" value="123" />
+    <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="TL_PLUGIN">
     <option name="myModel">
@@ -630,4 +624,3 @@
     <option name="INSTRUMENT_CLASSES" value="false" />
   </component>
 </project>
-
