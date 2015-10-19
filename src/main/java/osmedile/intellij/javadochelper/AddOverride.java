@@ -3,6 +3,7 @@ package osmedile.intellij.javadochelper;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.compiled.ClsModifierListImpl;
 import com.intellij.util.IncorrectOperationException;
 import osmedile.intellij.util.action.GroupWriteAction;
 import osmedile.intellij.util.psi.MethodUtil;
@@ -21,6 +22,7 @@ public class AddOverride extends GroupWriteAction {
             try {
 
                 final PsiModifierList modifiers = method.getModifierList();
+
                 PsiElementFactory factory = JavaPsiFacade.getInstance(project).getElementFactory();
                 PsiAnnotation annot =
                         factory.createAnnotationFromText("@Override", null);
@@ -34,10 +36,14 @@ public class AddOverride extends GroupWriteAction {
                 }
 
                 if (contains == false) {
-                    if (modifiers.getChildren().length > 0) {
-                        modifiers.addBefore(annot, modifiers.getChildren()[0]);
-                    } else {
-                        modifiers.add(annot);
+                    try {
+                        if (modifiers.getChildren().length > 0) {
+                            modifiers.addBefore(annot, modifiers.getChildren()[0]);
+                        } else {
+                            modifiers.add(annot);
+                        }
+                    } catch (IncorrectOperationException e) {
+                        e.printStackTrace();
                     }
                 }
 
