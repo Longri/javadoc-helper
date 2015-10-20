@@ -41,8 +41,9 @@
     <vendor email="osmedile@gmail.com">Olivier Smedile</vendor>
     <idea-version since-build="7361" />
     <actions>
-        <group id="osmedile.intellij.javadochelper" text="Javadoc Helper"
-               description="Javadoc Helper Group" popup="true">
+        <group id="osmedile.intellij.javadochelper" text="Cachebox Helper"
+               description="Javadoc Helper Group" popup="true"
+               icon="/cb_48x48_icon.png">
             <add-to-group group-id="EditorPopupMenu" anchor="last" />
             <add-to-group group-id="EditMenu" anchor="last" />
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last" />

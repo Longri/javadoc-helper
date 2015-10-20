@@ -43,7 +43,8 @@ public class JavadocHelperAppComp implements ApplicationComponent, Configurable,
 
     @Nullable
     public Icon getIcon() {
-        return IconLoader.findIcon("wi0126-32.png", this.getClass());
+        Icon ico = IconLoader.findIcon("cb_48x48_icon.png", this.getClass());;
+        return ico;
     }
 
 
@@ -120,6 +121,6 @@ public class JavadocHelperAppComp implements ApplicationComponent, Configurable,
 
 
     public void loadState(ConfigImpl state) {
-        XmlSerializerUtil.copyBean(state, config);
+       // XmlSerializerUtil.copyBean(state, config);
     }
 }
