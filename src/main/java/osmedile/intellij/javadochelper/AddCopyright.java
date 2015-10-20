@@ -62,8 +62,20 @@ public class AddCopyright extends GroupWriteAction {
     public void actionOn(DataContext dataContext, Project project,
                          PsiManager psiManager, PsiJavaFile psiJavaFile) {
 
+
+
+
         PsiElementFactory factory = JavaPsiFacade.getInstance(project).getElementFactory();
         PsiElement firstChild = psiJavaFile.getFirstChild();
+
+
+        //find first element, skip WhiteSpace
+
+        while (firstChild instanceof PsiWhiteSpace){
+
+                firstChild = firstChild.getNextSibling();
+
+        }
 
         if (firstChild instanceof PsiComment) {
             System.out.print(firstChild.getText());
