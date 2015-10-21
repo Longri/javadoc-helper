@@ -124,10 +124,6 @@ public class AddClassTag extends GroupWriteAction {
                             || (DONT_ADD.equals(tag.getReplaceMode()) &&
                             existantTag == null)) {
 
-                        //PsiDocTag newTag = factory.createDocTagFromText(
-                        //        "@" + tagName.replaceAll("@", "") + " " +
-                        //                tag.getValue(), docComment);
-
                         PsiDocTag newTag = factory.createDocTagFromText(
                                 "@" + tagName.replaceAll("@", "") + " " +
                                         tag.getValue());

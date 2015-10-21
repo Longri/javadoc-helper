@@ -71,7 +71,11 @@
     <option name="HIGHLIGHT_SCOPES" value="false" />
     <option name="DECOMPILATION_SOURCE_DIR" />
   </component>
-  <component name="CopyrightManager" default="" />
+  <component name="CopyrightManager" default="test">
+    <copyright>
+      <option name="myName" value="test" />
+    </copyright>
+  </component>
   <component name="DBNavigator.Project.CodeEditorSettings">
     <code-completion>
       <basic-scheme>
@@ -489,7 +493,7 @@
       <SplitterProportionsDataImpl />
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA 7718" project-jdk-type="IDEA JDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="IntelliJ IDEA Community Edition IC-141.2735.5" project-jdk-type="IDEA JDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ResourceManagerContainer">
