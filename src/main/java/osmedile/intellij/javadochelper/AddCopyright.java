@@ -9,8 +9,11 @@ import com.intellij.util.IncorrectOperationException;
 import osmedile.intellij.util.action.GroupWriteAction;
 import osmedile.intellij.util.psi.PsiDocTagUtil;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static osmedile.intellij.javadochelper.ClassTag.REPLACE_MODE.*;
 
@@ -99,11 +102,35 @@ public class AddCopyright extends GroupWriteAction {
     private void addAuthorTag(DataContext dataContext, Project project,
                               PsiManager psiManager, PsiJavaFile psiJavaFile) {
 
+
+        //blame file with GIT command
+        // git shortlog -s -p "filename"
+
+        String failePath = psiJavaFile.getOriginalFile().getVirtualFile().getPath();
+        String projectPath = new File(failePath).getParent();
+        try {
+            //runCommand(new File(projectPath), "git", "shortlog", "-s", "-p", failePath );
+          //  runCommand(new File(projectPath), "cmd", "/c start dir");
+
+
+            //runCommand(new File(projectPath), "git", " shortlog -s");
+
+           // runCommand(new File(projectPath), "git", "--help", "-a");
+
+         //   runCommand(new File(projectPath), "git", "--help", "-g");
+
+            runCommand(new File(projectPath), "git", "shortlog", "-s");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
         PsiClass[] psiClasses = psiJavaFile.getClasses();
         for (PsiClass psiClass : psiClasses) {
             try {
                 PsiDocComment docComment = psiClass.getDocComment();
-
 
                 boolean addDocComment = false;
                 PsiElementFactory factory = JavaPsiFacade.getInstance(project).getElementFactory();
@@ -209,5 +236,81 @@ public class AddCopyright extends GroupWriteAction {
             }
         }
     }
+
+    public static void runCommand(File directory, String... command) throws IOException, InterruptedException {
+
+        try {
+            ProcessBuilder pb = new ProcessBuilder(command)
+                    .redirectErrorStream(true).directory(directory);
+
+
+//            Map<String, String> envs = pb.environment();
+//            envs.put("Path", "C:/Program Files (x86)/Git/cmd");
+
+            Process p = pb.start();
+
+            InputStream is = p.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String in;
+
+            boolean timeOut = false;
+
+            if (!p.waitFor(6, TimeUnit.SECONDS)) {
+                //timeout - kill the process.
+                p.destroy(); // consider using destroyForcibly instead
+                timeOut = true;
+            }
+            if (!timeOut) {
+                while ((in = br.readLine()) != null) {
+                    System.out.println(in);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+//        ProcessBuilder pb = new ProcessBuilder()
+//                .command(command)
+//                .directory(directory);
+//        Process p = pb.start();
+//        StreamGobbler errorGobbler = new StreamGobbler(p.getErrorStream(), "ERROR");
+//        StreamGobbler outputGobbler = new StreamGobbler(p.getInputStream(), "OUTPUT");
+//        outputGobbler.start();
+//        errorGobbler.start();
+//        int exit = p.waitFor();
+//        errorGobbler.join();
+//        outputGobbler.join();
+//        if (exit != 0) {
+//            throw new AssertionError(String.format("runCommand returned %d", exit));
+//        }
+    }
+
+    private static class StreamGobbler extends Thread {
+
+        InputStream is;
+        String type;
+
+        private StreamGobbler(InputStream is, String type) {
+            this.is = is;
+            this.type = type;
+        }
+
+        @Override
+        public void run() {
+            try {
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    System.out.println(type + "> " + line);
+                }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+    }
+
 
 }
