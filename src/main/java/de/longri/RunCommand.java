@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Longri 2015
+ * test commit over android 
  */
 public class RunCommand {
 
